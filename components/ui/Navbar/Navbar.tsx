@@ -4,7 +4,7 @@ import Navlinks from "./Navlinks";
 // rgb(204, 123, 244)
 export default function Navbar() {
   return (
-    <div className="w-screen flex justify-between items-center px-4 py-2 bg-zinc-900 ">
+    <div className="w-full flex justify-between items-center px-4 py-2 bg-zinc-900 h-[7vh]">
       <div className="logoSection text-xl items-center gap-1 text-[#cc7bf4] flex pl-8 font-bold">
         <svg
           width="28"
