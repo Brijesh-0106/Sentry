@@ -62,7 +62,7 @@ export default function Navbar() {
         </svg>
         Sentry
       </div>
-      <div className="flex gap-30">
+      <div className="flex gap-20">
         <div className="navLinksSection flex items-center gap-12 text-lg text-white">
           <Navlinks />
         </div>
