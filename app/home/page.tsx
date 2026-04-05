@@ -1,9 +1,19 @@
 "use client";
 import { useRef, useState } from "react";
+import { metaDataInterface } from "../utils/metaDataInterface";
 
 export default function Home() {
-  const [showError, setShowError] = useState(false); // ← only add this
-  const [isEmpty, setIsEmpty] = useState(true); // ← add this
+  const [metaData, setMetaData] = useState<metaDataInterface>({
+    number: 0,
+    title: "",
+    user: {
+      login: "",
+      avatar_url: "",
+    },
+    changed_files: 0,
+  });
+  const [showError, setShowError] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const isValidPR = () => {
@@ -24,6 +34,7 @@ export default function Home() {
     const finalApiUrl = apiUrl.replace("pull", "pulls");
     const resMetaData = await fetch(finalApiUrl);
     const metaData = await resMetaData.json();
+    setMetaData(metaData);
     console.log(metaData);
 
     const resFileChanges = await fetch(finalApiUrl + "/files");
@@ -32,7 +43,7 @@ export default function Home() {
   };
 
   return (
-    <div className="hero-section flex h-[calc(100vh-7vh)] flex-col items-center bg-black">
+    <div className="hero-section flex h-[calc(100vh-7vh)] flex-col px-4 items-center bg-black">
       <div className=" my-6">
         <h3 className="text-center text-2xl pb-2 text-[#cc7bf4]">
           Paste any GitHub PR link below
@@ -41,7 +52,7 @@ export default function Home() {
           Any public GitHub PR. Instant AI review
         </h4>
       </div>
-      <div className="middleContainer px-4 py-4  rounded-2xl w-2/3 bg-zinc-900">
+      <div className="middleContainer px-4 py-4  rounded-2xl w-screen mx-4 bg-zinc-900">
         <div className="flex gap-2 justify-center">
           <div className="flex flex-col">
             <input
@@ -68,12 +79,19 @@ export default function Home() {
         <div className="devider">
           <hr className="border-zinc-700 my-6" />
         </div>
-        <div className="flex">
-          <div className="leftPanel text-white w-3/10">
-            <h1> Files Changedb</h1>
-           </div>
-          <div className="rightPanel text-white w-7/10">
-            <h1>Review</h1>
+        <div className="flex gap-4 justify-center">
+          <div className="leftPanel border-white  text-lg border p-2 w-4/10">
+            <h1 className="text-center text-[#cc7bf4]"> Files Changes</h1>
+          </div>
+          <div className="rightPanel border-white border text-lg p-2 w-6/10">
+            <h1 className="text-center text-[#cc7bf4]">Review</h1>
+            <div className="text-white">
+              <div className="reqNo">PullRequest - #{metaData?.number}</div>
+              <div className="reqNo">{metaData?.title}</div>
+              <div className="reqNo">
+                by @{metaData?.user.login} = {metaData.changed_files} files
+              </div>
+            </div>
           </div>
         </div>
       </div>
