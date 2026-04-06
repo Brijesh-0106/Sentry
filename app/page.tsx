@@ -138,7 +138,7 @@ export default function Home() {
       </div>
       <div className="rightVideoSection pr-2 ml-20 py-14 h-full w-1/2">
         <div className="w-full h-full bg-zinc-900 border-zinc-700 border flex flex-col rounded-2xl">
-          <span className="text-[#cc7bf4] text-center text-xl py-2 px-3  mx-auto mt-8 rounded-2xl  border border-zinc-700">
+          <span className="text-[#cc7bf4] text-center text-md py-2 px-3  mx-auto mt-8 rounded-2xl  border border-zinc-700">
             How to Use?
           </span>
         </div>
